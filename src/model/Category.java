@@ -6,7 +6,8 @@ public enum Category {
     DOCUMENTARY ("Documentário"),
     ANIMATION ("Animação"),
     INTERVIEW ("Entrevista"),
-    MUSIC ("Clipes musicais"),
+    MUSIC ("Clipe musicaL"),
+    COURSE ("Curso"),
     OTHER ("Outra categoria");
 
     private String description;
@@ -22,11 +23,10 @@ public enum Category {
 
     public static boolean isValidCategory(String category) {
         for (Category cat : values()) {
-            if (cat.name().equalsIgnoreCase(category)) {
+            if (cat.toString().equalsIgnoreCase(category)) {
                 return true;
             }
         }
         return false;
     }
-
 }
