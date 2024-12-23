@@ -20,4 +20,13 @@ public enum Category {
         return description;
     }
 
+    public static boolean isValidCategory(String category) {
+        for (Category cat : values()) {
+            if (cat.name().equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
