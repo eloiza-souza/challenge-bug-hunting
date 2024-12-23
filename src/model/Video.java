@@ -4,44 +4,44 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Video {
-    private String titulo;
-    private String descricao;
-    private int duracao; // em minutos
-    private String categoria;
-    private Date dataPublicacao;
+    private String title;
+    private String description;
+    private int duration; // em minutos
+    private String category;
+    private Date publicationDate;
 
-    public Video(String titulo, String descricao, int duracao, String categoria, Date dataPublicacao) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.duracao = duracao;
-        this.categoria = categoria;
-        this.dataPublicacao = dataPublicacao;
+    public Video(String titulo, String description, int duration, String category, Date publicationDate) {
+        this.title = title;
+        this.description = description;
+        this.duration = duration;
+        this.category = category;
+        this.publicationDate = publicationDate;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public int getDuracao() {
-        return duracao;
+    public int getDuration() {
+        return duration;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public Date getDataPublicacao() {
-        return dataPublicacao;
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return titulo + ";" + descricao + ";" + duracao + ";" + categoria + ";" + sdf.format(dataPublicacao);
+        return title + ";" + description + ";" + duration + ";" + category + ";" + sdf.format(publicationDate);
     }
 
     public static Video fromString(String linha) {
