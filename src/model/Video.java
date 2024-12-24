@@ -1,5 +1,7 @@
 package model;
 
+import util.DateUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,7 +42,6 @@ public class Video {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return title + ";" + description + ";" + duration + ";" + category + ";" + sdf.format(publicationDate);
+        return title + ";" + description + ";" + duration + ";" + category + ";" + DateUtil.toString(publicationDate);
     }
 }

@@ -1,8 +1,10 @@
 package repository;
 
 import model.Video;
+import service.VideoManager;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +31,15 @@ public class FileVideoRepository implements VideoRepository {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Video video = Video.fromString(line);
+                Video video = new VideoManager().fromString(line);
                 if (video != null) {
                     videos.add(video);
                 }
             }
         } catch (IOException e) {
             // Ignorar erros por enquanto
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
         return videos;
     }

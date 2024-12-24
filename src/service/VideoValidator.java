@@ -1,8 +1,8 @@
 package service;
 
 import model.Category;
+import util.DateUtil;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -52,8 +52,14 @@ public class VideoValidator {
         }
     }
 
-    public static Date parseAndValidateDate(String dateString) throws ParseException{
-        DATE_FORMAT.setLenient(false);
-        return DATE_FORMAT.parse(dateString);
+    public static Date validateDate(String dateString) {
+        Date date = DateUtil.parseDate(dateString);
+        if (date.before(new Date())){
+            return date;
+        }
+        else{
+            throw new IllegalArgumentException("A data do vídeo deve ser anterior ao dia de hoje. " +
+                    "Valor fornecido: " + DateUtil.toString(date));
+        }
     }
 }

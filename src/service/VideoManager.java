@@ -1,6 +1,5 @@
 package service;
 
-import model.Category;
 import model.Video;
 
 import java.text.ParseException;
@@ -18,8 +17,7 @@ public class VideoManager {
         VideoValidator.validateCategory(category);
 
         int validatedDuration = VideoValidator.validateDuration(duration);
-        Date validatedDate = VideoValidator.parseAndValidateDate(publicationDate);
-
+        Date validatedDate = VideoValidator.validateDate(publicationDate);
 
         return new Video(title, description, validatedDuration, category, validatedDate);
     }

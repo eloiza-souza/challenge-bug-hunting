@@ -8,7 +8,7 @@ public class TestVideoManager {
         VideoManager videoManager = new VideoManager();
 
         try {
-            Video video = videoManager.createVideo("Aprendendo Java", "Curso completo de Java", "120", "curso", "15/10/2023");
+            Video video = videoManager.createVideo("Aprendendo Java", "Curso completo de Java", "120", "curso", "25/12/2024");
             System.out.println("Vídeo criado com sucesso: " + video);
         } catch (Exception e) {
             System.err.println("Erro ao criar vídeo: " + e.getMessage());
