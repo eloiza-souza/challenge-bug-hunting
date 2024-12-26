@@ -22,8 +22,8 @@ public class VideoManager {
         return new Video(title, description, validatedDuration, category, validatedDate);
     }
 
-    public Video fromString(String linha) throws ParseException {
-        String[] split = linha.split(";");
+    public Video fromString(String line) throws ParseException {
+        String[] split = line.split(";");
         if (split.length != 5) {
             throw new IllegalArgumentException("A string fornecida não está no formato esperado.");
         }
