@@ -20,7 +20,7 @@ public class VideoController {
     }
 
     public void run() {
-
+        System.out.println("\n=== Sistema de Gerenciamento de Vídeos ===");
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 try {
@@ -72,7 +72,7 @@ public class VideoController {
         List<Video> videoList = videoService.listVideos();
         if (videoList.isEmpty())
             System.out.println("Sistema não tem vídeos cadastrados.");
-        else{
+        else {
             System.out.println("Vídeos cadastrados:");
             showVideos(videoList);
         }
@@ -87,10 +87,9 @@ public class VideoController {
     private void searchByTitle(Scanner scanner) {
         String query = ScannerUtil.readString(scanner, "Digite o título para busca: ");
         List<Video> resultList = new TitleSearchStrategy().search(videoService.listVideos(), query);
-        if (resultList.isEmpty()){
+        if (resultList.isEmpty()) {
             System.out.println("Nenhum vídeo encontrado com o título: '" + query + "'.");
-        }
-        else{
+        } else {
             System.out.println("Resultados encontrados para o título: '" + query + "':");
             showVideos(resultList);
         }

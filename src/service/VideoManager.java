@@ -74,7 +74,7 @@ public class VideoManager {
         while (true) {
             try {
                 duration = VideoValidator.validateDuration(
-                        ScannerUtil.readString(scanner, "Digite a duração do vídeo: "));
+                        ScannerUtil.readString(scanner, "Digite a duração do vídeo (em minutos): "));
                 break;
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
@@ -100,7 +100,7 @@ public class VideoManager {
         while (true) {
             try {
                 date = VideoValidator.validateDate(
-                        ScannerUtil.readString(scanner, "Digite a data do vídeo: "));
+                        ScannerUtil.readString(scanner, "Digite a data de publicação (dd/MM/yyyy): "));
                 break;
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
