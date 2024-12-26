@@ -22,7 +22,7 @@ public class DateUtil {
         try {
             return sdf.parse(dateInput);
         } catch (ParseException e) {
-            System.err.println("Formato de data inválido");
+            throw new IllegalArgumentException("Formato inválido");
         }
     }
 
