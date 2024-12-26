@@ -85,9 +85,9 @@ public class VideoManager {
     }
 
     private static String getVideoCategory(Scanner scanner) {
-        MenuUtil.showMenu(Category.class);
+        MenuUtil.showMenu(Category.class, "Escolha uma categoria: ");
         while (true) {
-            int option = ScannerUtil.readInt(scanner, "Escolha uma categoria: ");
+            int option = ScannerUtil.readInt(scanner, "Categoria: ");
             if (option >= 1 && option <= Category.values().length) {
                 return Category.values()[option - 1].toString();
             }

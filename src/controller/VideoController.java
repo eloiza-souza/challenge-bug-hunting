@@ -48,8 +48,7 @@ public class VideoController {
     }
 
     private void showPrincipalMenu() {
-        System.out.println("Escolha uma opção: ");
-        MenuUtil.showMenu(PrincipalMenu.class);
+        MenuUtil.showMenu(PrincipalMenu.class, "Escolha uma opção: ");
     }
 
     private PrincipalMenu getUserChoice(Scanner scanner) {
