@@ -30,7 +30,7 @@ public class VideoController {
 
                     switch (choice) {
                         case ADD -> addVideo(scanner);
-                        case LIST -> listAllVideos(scanner);
+                        case LIST -> listAllVideos();
                         case SEARCH_BY_TITLE -> searchByTitle(scanner);
                         case EXIT -> {
                             System.out.println("Encerrando o programa...");
@@ -68,18 +68,32 @@ public class VideoController {
         System.out.println("Vídeo adicionado com sucesso!");
     }
 
-    private void listAllVideos(Scanner scanner) {
+    private void listAllVideos() {
         List<Video> videoList = videoService.listVideos();
         if (videoList.isEmpty())
             System.out.println("Sistema não tem vídeos cadastrados.");
-        System.out.println("Vídeos cadastrados:");
-        for(Video video: videoList){
-            System.out.println("- " + video);
+        else{
+            System.out.println("Vídeos cadastrados:");
+            showVideos(videoList);
+        }
+    }
+
+    private void showVideos(List<Video> videos) {
+        for (int i = 0; i < videos.size(); i++) {
+            System.out.println((i + 1) + ". " + videos.get(i));
         }
     }
 
     private void searchByTitle(Scanner scanner) {
-
+        String query = ScannerUtil.readString(scanner, "Digite o título para busca: ");
+        List<Video> resultList = new TitleSearchStrategy().search(videoService.listVideos(), query);
+        if (resultList.isEmpty()){
+            System.out.println("Nenhum vídeo encontrado com o título: '" + query + "'.");
+        }
+        else{
+            System.out.println("Resultados encontrados para o título: '" + query + "':");
+            showVideos(resultList);
+        }
     }
 
 }
