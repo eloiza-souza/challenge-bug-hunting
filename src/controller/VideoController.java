@@ -1,27 +1,75 @@
 package controller;
 
-import model.Menu;
+import model.PrincipalMenu;
+import service.VideoManager;
+import service.VideoService;
+import util.MenuUtil;
+import util.ScannerUtil;
 
 import java.util.Scanner;
 
 public class VideoController {
-    final int EXIT = Menu.values().length + 1;
+
+    VideoService videoService;
+
+    public VideoController(VideoService videoService) {
+        this.videoService = videoService;
+    }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
 
-        showMenu();
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                try {
+                    showPrincipalMenu();
 
-        scanner.close();
-    }
+                    PrincipalMenu choice = getUserChoice(scanner);
 
-    private void showMenu() {
-        System.out.println("\nEscolha uma opção:");
-        int index = 1;
-        for (Menu option : Menu.values()) {
-            System.out.println(index++ + ". " + option.getDescription());
+                    switch (choice) {
+                        case ADD -> addVideo(scanner);
+                        case LIST -> listAllVideos(scanner);
+                        case SEARCH_BY_TITLE -> searchByTitle(scanner);
+                        case EXIT -> {
+                            System.out.println("Encerrando o programa...");
+                            return;
+                        }
+                        default -> System.out.println("Opção inválida. Tente novamente.");
+                    }
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
-        System.out.println(EXIT + ". Sair");
     }
+
+    private void showPrincipalMenu() {
+        System.out.println("Escolha uma opção: ");
+        MenuUtil.showMenu(PrincipalMenu.class);
+    }
+
+    private PrincipalMenu getUserChoice(Scanner scanner) {
+        int choice;
+        do {
+            choice = ScannerUtil.readInt(scanner, "Opção:");
+            if (choice < 1 || choice > PrincipalMenu.values().length) {
+                System.out.println("Opção inválida. Escolha um número entre 1 e " + PrincipalMenu.values().length + ".");
+            }
+        } while (choice < 1 || choice > PrincipalMenu.values().length);
+        return PrincipalMenu.values()[choice - 1];
+    }
+
+    private void addVideo(Scanner scanner) {
+        videoService.addVideo(VideoManager.createVideo(scanner));
+        System.out.println("Vídeo adicionado com sucesso!");
+    }
+
+    private void searchByTitle(Scanner scanner) {
+    }
+
+    private void listAllVideos(Scanner scanner) {
+    }
+
 
 }

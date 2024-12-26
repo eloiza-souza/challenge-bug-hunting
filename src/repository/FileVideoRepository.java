@@ -4,7 +4,6 @@ import model.Video;
 import service.VideoManager;
 import util.FileHandler;
 
-import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,14 @@ public class FileVideoRepository implements VideoRepository {
         return convertList(this.file.readLinesFromFile());
     }
 
-    private List<Video> convertList(List<String> lines)  {
+    private List<Video> convertList(List<String> lines) {
         List<Video> videos = new ArrayList<>();
-        for(String line: lines){
+        for (String line : lines) {
             try {
-                videos.add(new VideoManager().fromString(line));
+                videos.add(VideoManager.createVideo(line));
             } catch (ParseException e) {
-                System.err.println("Data inválida");;
+                System.err.println("Data inválida");
+                ;
             }
         }
         return videos;
