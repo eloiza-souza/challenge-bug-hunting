@@ -1,14 +1,15 @@
 package model;
 
 public enum Category {
-    FILM ("Filme"),
-    SERIE ("Série"),
-    DOCUMENTARY ("Documentário"),
-    ANIMATION ("Animação"),
-    INTERVIEW ("Entrevista"),
-    MUSIC ("Clipe musicaL"),
-    COURSE ("Curso"),
-    OTHER ("Outra categoria");
+    FILM("Filme"),
+    SERIE("Série"),
+    DOCUMENTARY("Documentário"),
+    ANIMATION("Animação"),
+    INTERVIEW("Entrevista"),
+    MUSIC("Clipe musicaL"),
+    COURSE("Curso"),
+    OTHER("Outra categoria");
+
 
     private String description;
 
@@ -29,4 +30,6 @@ public enum Category {
         }
         return false;
     }
+
+
 }
