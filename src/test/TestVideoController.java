@@ -7,8 +7,8 @@ import service.VideoServiceImpl;
 
 public class TestVideoController {
     public static void main(String[] args) {
-        VideoService videoService = new VideoServiceImpl(new FileVideoRepository("videos.txt"));
-        VideoController videoController = new VideoController(videoService);
+        VideoController videoController =
+                new VideoController(new VideoServiceImpl(new FileVideoRepository("videos.txt")));
         videoController.run();
     }
 }

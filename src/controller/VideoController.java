@@ -1,11 +1,14 @@
 package controller;
 
 import model.PrincipalMenu;
+import model.Video;
 import service.VideoManager;
 import service.VideoService;
+import strategy.TitleSearchStrategy;
 import util.MenuUtil;
 import util.ScannerUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class VideoController {
@@ -65,11 +68,18 @@ public class VideoController {
         System.out.println("Vídeo adicionado com sucesso!");
     }
 
-    private void searchByTitle(Scanner scanner) {
-    }
-
     private void listAllVideos(Scanner scanner) {
+        List<Video> videoList = videoService.listVideos();
+        if (videoList.isEmpty())
+            System.out.println("Sistema não tem vídeos cadastrados.");
+        System.out.println("Vídeos cadastrados:");
+        for(Video video: videoList){
+            System.out.println("- " + video);
+        }
     }
 
+    private void searchByTitle(Scanner scanner) {
+
+    }
 
 }
