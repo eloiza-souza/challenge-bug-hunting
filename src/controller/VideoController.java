@@ -4,6 +4,7 @@ import model.PrincipalMenu;
 import model.Video;
 import service.VideoManager;
 import service.VideoService;
+import strategy.ListByCategoryStrategy;
 import strategy.TitleSearchStrategy;
 import util.MenuUtil;
 import util.ScannerUtil;
@@ -34,9 +35,11 @@ public class VideoController {
                         case SEARCH_BY_TITLE -> searchByTitle(scanner);
                         case EDIT -> editVideo(scanner);
                         case DELETE -> deleteVideo(scanner);
+                        case VIDEOS_BY_CATEGORY -> filterByCategory(scanner);
+                        case SORT_BY_DATE -> sortByDate();
                         case EXIT -> {
                             System.out.println("Encerrando o programa...");
-                            return;
+                            System.exit(0);
                         }
                         default -> System.out.println("Opção inválida. Tente novamente.");
                     }
@@ -47,6 +50,9 @@ public class VideoController {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    private void sortByDate() {
     }
 
     private void showPrincipalMenu() {
@@ -108,6 +114,17 @@ public class VideoController {
         }
     }
 
+    private void filterByCategory(Scanner scanner){
+        String category = VideoManager.readVideoCategory(scanner);
+        List<Video> resultList = new ListByCategoryStrategy().search(videoService.listVideos(), category);
+        if (resultList.isEmpty()) {
+            System.out.println("Nenhum vídeo encontrado com a categoria: '" + category + "'.");
+        } else {
+            System.out.println("Resultados encontrados para a categoria: '" + category + "':");
+            showVideos(resultList);
+        }
+    }
+
     private void deleteVideo(Scanner scanner) {
         List<Video> videoList = videoService.listVideos();
         if (videoList.isEmpty()) {
@@ -138,30 +155,15 @@ public class VideoController {
         do {
             option = ScannerUtil.readInt(scanner, "Digite o número do atributo a ser alterado (ou 0 para finalizar edição): ");
             switch (option) {
-                case 0:
-                    System.out.println("Edição concluída.");
-                    continue;
-                case 1:
-                    video.setTitle(VideoManager.readVideoTitle(scanner));
-                    break;
-                case 2:
-                    video.setDescription(VideoManager.readVideoDescription(scanner));
-                    break;
-                case 3:
-                    video.setDuration(VideoManager.readVideoDuration(scanner));
-                    break;
-                case 4:
-                    video.setCategory(VideoManager.readVideoCategory(scanner));
-                    break;
-                case 5:
-                    video.setPublicationDate(VideoManager.readVideoDate(scanner));
-                    break;
-                default:
-                    System.out.println("Opção inválida. Por favor, insira um número entre 0 e 5.");
+                case 0 -> System.out.println("Fim da edição.");
+                case 1 -> video.setTitle(VideoManager.readVideoTitle(scanner));
+                case 2 -> video.setDescription(VideoManager.readVideoDescription(scanner));
+                case 3 -> video.setDuration(VideoManager.readVideoDuration(scanner));
+                case 4 -> video.setCategory(VideoManager.readVideoCategory(scanner));
+                case 5 -> video.setPublicationDate(VideoManager.readVideoDate(scanner));
+                default -> System.out.println("Opção inválida. Por favor, insira um número entre 0 e 5.");
             }
         } while (option != 0);
-        System.out.println("Video alterado:");
-        VideoManager.showVideoAttributes(video);
         return video;
     }
 

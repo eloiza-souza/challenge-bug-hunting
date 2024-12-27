@@ -54,4 +54,5 @@ public class FileHandler {
             System.err.println("Erro ao deletar vídeo: " + e.getMessage());
         }
     }
+
 }
