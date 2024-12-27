@@ -40,6 +40,24 @@ public class Video {
         return publicationDate;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
+    }
     @Override
     public String toString() {
         return title + ";" + description + ";" + duration + ";" + category + ";" + DateUtil.toString(publicationDate);
