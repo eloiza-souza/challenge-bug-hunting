@@ -36,7 +36,7 @@ public class VideoController {
                         case EDIT -> editVideo(scanner);
                         case DELETE -> deleteVideo(scanner);
                         case VIDEOS_BY_CATEGORY -> filterByCategory(scanner);
-                        case SORT_BY_DATE -> sortByDate();
+                        case SORT_BY_DATE -> showVideosSortByDate();
                         case EXIT -> {
                             System.out.println("Encerrando o programa...");
                             System.exit(0);
@@ -50,9 +50,6 @@ public class VideoController {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    private void sortByDate() {
     }
 
     private void showPrincipalMenu() {
@@ -114,17 +111,6 @@ public class VideoController {
         }
     }
 
-    private void filterByCategory(Scanner scanner){
-        String category = VideoManager.readVideoCategory(scanner);
-        List<Video> resultList = new ListByCategoryStrategy().search(videoService.listVideos(), category);
-        if (resultList.isEmpty()) {
-            System.out.println("Nenhum vídeo encontrado com a categoria: '" + category + "'.");
-        } else {
-            System.out.println("Resultados encontrados para a categoria: '" + category + "':");
-            showVideos(resultList);
-        }
-    }
-
     private void deleteVideo(Scanner scanner) {
         List<Video> videoList = videoService.listVideos();
         if (videoList.isEmpty()) {
@@ -136,6 +122,24 @@ public class VideoController {
             System.out.println("Vídeo deletado com sucesso!");
         }
     }
+
+    private void filterByCategory(Scanner scanner){
+        String category = VideoManager.readVideoCategory(scanner);
+        List<Video> resultList = new ListByCategoryStrategy().search(videoService.listVideos(), category);
+        if (resultList.isEmpty()) {
+            System.out.println("Nenhum vídeo encontrado com a categoria: '" + category + "'.");
+        } else {
+            System.out.println("Resultados encontrados para a categoria: '" + category + "':");
+            showVideos(resultList);
+        }
+    }
+
+    private void showVideosSortByDate() {
+        List<Video> videoList = videoService.listVideos();
+        videoList.sort((Video v1, Video v2) -> v1.getPublicationDate().compareTo(v2.getPublicationDate()));
+        showVideos(videoList);
+    }
+
 
     private int getValidVideoIndex(Scanner scanner, int size) {
         int index;
