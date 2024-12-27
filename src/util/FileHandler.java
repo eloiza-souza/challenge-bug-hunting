@@ -34,9 +34,9 @@ public class FileHandler {
         return linesFromFile;
     }
 
-    public void updateLine(int lineNumber, String newLine) {
+    public void updateLine(int lineNumber, String newLine){
         List<String> linesFile = readLinesFromFile();
-        linesFile.set(lineNumber, newLine);
+        linesFile.set(lineNumber,newLine);
         try {
             Files.write(file.toPath(), linesFile);
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class FileHandler {
         }
     }
 
-    public void deleteLine(int lineNumber) {
+    public void deleteLine(int lineNumber){
         List<String> linesFile = readLinesFromFile();
         linesFile.remove(lineNumber);
         try {
