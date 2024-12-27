@@ -2,7 +2,6 @@ package model;
 
 import util.DateUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Video {
@@ -43,6 +42,7 @@ public class Video {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -58,6 +58,7 @@ public class Video {
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
+
     @Override
     public String toString() {
         return title + ";" + description + ";" + duration + ";" + category + ";" + DateUtil.toString(publicationDate);

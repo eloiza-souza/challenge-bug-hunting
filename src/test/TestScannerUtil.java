@@ -14,7 +14,7 @@ public class TestScannerUtil {
         String inputString = ScannerUtil.readString(scanner, "digite uma String: ");
         System.out.println("String digitada " + inputString);
 
-        int inputInt = ScannerUtil.readInt(scanner,"Digite um inteiro: ");
+        int inputInt = ScannerUtil.readInt(scanner, "Digite um inteiro: ");
         System.out.println("Int digitado " + inputInt);
 
         Date date = ScannerUtil.readDateFromScanner(scanner, "Digite uma data no formato " + DateUtil.DATE_FORMAT + ": ");

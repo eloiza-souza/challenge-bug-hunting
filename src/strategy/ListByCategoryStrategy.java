@@ -5,7 +5,7 @@ import model.Video;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListByCategoryStrategy implements SearchStrategy{
+public class ListByCategoryStrategy implements SearchStrategy {
     @Override
     public List<Video> search(List<Video> videos, String category) {
         return videos.stream()

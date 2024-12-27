@@ -2,7 +2,6 @@ package util;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +34,9 @@ public class FileHandler {
         return linesFromFile;
     }
 
-    public void updateLine(int lineNumber, String newLine){
+    public void updateLine(int lineNumber, String newLine) {
         List<String> linesFile = readLinesFromFile();
-        linesFile.set(lineNumber,newLine);
+        linesFile.set(lineNumber, newLine);
         try {
             Files.write(file.toPath(), linesFile);
         } catch (IOException e) {
@@ -45,7 +44,7 @@ public class FileHandler {
         }
     }
 
-    public void deleteLine(int lineNumber){
+    public void deleteLine(int lineNumber) {
         List<String> linesFile = readLinesFromFile();
         linesFile.remove(lineNumber);
         try {
@@ -54,5 +53,4 @@ public class FileHandler {
             System.err.println("Erro ao deletar vídeo: " + e.getMessage());
         }
     }
-
 }

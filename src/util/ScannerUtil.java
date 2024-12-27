@@ -3,12 +3,10 @@ package util;
 import java.util.Date;
 import java.util.Scanner;
 
-import static util.DateUtil.*;
+import static util.DateUtil.isValidDate;
+import static util.DateUtil.parseDate;
 
 public final class ScannerUtil {
-
-    private ScannerUtil() {
-    }
 
     public static String readString(Scanner scanner, String message) {
         while (true) {

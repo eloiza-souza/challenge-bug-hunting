@@ -54,10 +54,9 @@ public class VideoValidator {
 
     public static Date validateDate(String dateString) {
         Date date = DateUtil.parseDate(dateString);
-        if (date.before(new Date())){
+        if (date.before(new Date())) {
             return date;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("A data do vídeo deve ser anterior ao dia de hoje. " +
                     "Valor fornecido: " + DateUtil.toString(date));
         }

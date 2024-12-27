@@ -2,9 +2,9 @@ package service;
 
 import model.Category;
 import model.Video;
+import util.DateUtil;
 import util.MenuUtil;
 import util.ScannerUtil;
-import util.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -111,7 +111,7 @@ public class VideoManager {
         return date;
     }
 
-    public static void showVideoAttributes(Video video){
+    public static void showVideoAttributes(Video video) {
         System.out.println("1. Título: " + video.getTitle());
         System.out.println("2. Descrição: " + video.getDescription());
         System.out.println("3. Duração (minutos): " + video.getDuration());

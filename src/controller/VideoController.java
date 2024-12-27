@@ -126,7 +126,7 @@ public class VideoController {
         }
     }
 
-    private void filterByCategory(Scanner scanner){
+    private void filterByCategory(Scanner scanner) {
         String category = VideoManager.readVideoCategory(scanner);
         List<Video> resultList = new ListByCategoryStrategy().search(videoService.listVideos(), category);
         if (resultList.isEmpty()) {

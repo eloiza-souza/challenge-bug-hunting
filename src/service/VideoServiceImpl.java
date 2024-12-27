@@ -24,7 +24,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public void setVideo(int index, Video video) {
-        repository.editVideo(index,video);
+        repository.editVideo(index, video);
     }
 
     @Override
