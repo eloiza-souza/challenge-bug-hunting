@@ -32,6 +32,8 @@ public class VideoController {
                         case ADD -> addVideo(scanner);
                         case LIST -> listAllVideos();
                         case SEARCH_BY_TITLE -> searchByTitle(scanner);
+                        case EDIT -> editVideo(scanner);
+                        case DELETE -> deleteVideo(scanner);
                         case EXIT -> {
                             System.out.println("Encerrando o programa...");
                             return;
@@ -92,6 +94,66 @@ public class VideoController {
             System.out.println("Resultados encontrados para o título: '" + query + "':");
             showVideos(resultList);
         }
+    }
+
+    private void editVideo(Scanner scanner) {
+        List<Video> videoList = videoService.listVideos();
+        if (videoList.isEmpty())
+            System.out.println("Não há vídeos para serem editados");
+        showVideos(videoList);
+        int index = getValidVideoIndex(scanner, videoList.size());
+        System.out.println("Editando o vídeo...");
+        videoService.setVideo(index, editVideoByAttributes(scanner, videoList.get(index)));
+        System.out.println("Vídeo editado com sucesso!");
+    }
+
+
+    private void deleteVideo(Scanner scanner) {
+    }
+
+    private int getValidVideoIndex(Scanner scanner, int size) {
+        int index;
+        while (true) {
+            index = ScannerUtil.readInt(scanner, "Digite o número do vídeo a ser alterado: ") - 1;
+            if (index >= 0 && index < size) {
+                break;
+            }
+            System.out.println("Índice inválido. Por favor, insira um número entre 1 e " + size + ".");
+        }
+        return index;
+    }
+
+    private Video editVideoByAttributes(Scanner scanner, Video video) {
+        VideoManager.showVideoAttributes(video);
+        int option;
+        do {
+            option = ScannerUtil.readInt(scanner, "Digite o número do atributo a ser alterado (ou 0 para sair): ");
+            switch (option) {
+                case 0:
+                    System.out.println("Edição concluída.");
+                    continue;
+                case 1:
+                    video.setTitle(VideoManager.readVideoTitle(scanner));
+                    break;
+                case 2:
+                    video.setDescription(VideoManager.readVideoDescription(scanner));
+                    break;
+                case 3:
+                    video.setDuration(VideoManager.readVideoDuration(scanner));
+                    break;
+                case 4:
+                    video.setCategory(VideoManager.readVideoCategory(scanner));
+                    break;
+                case 5:
+                    video.setPublicationDate(VideoManager.readVideoDate(scanner));
+                    break;
+                default:
+                    System.out.println("Opção inválida. Por favor, insira um número entre 0 e 5.");
+            }
+        }while (option != 0);
+        System.out.println("Video alterado:");
+        VideoManager.showVideoAttributes(video);
+        return video;
     }
 
 }

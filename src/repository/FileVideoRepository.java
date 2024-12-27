@@ -9,20 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileVideoRepository implements VideoRepository {
-    private final FileHandler file;
+    private final FileHandler fileHandler;
 
     public FileVideoRepository(String filePath) {
-        this.file = new FileHandler(filePath);
+        this.fileHandler = new FileHandler(filePath);
     }
 
     @Override
     public void save(Video video) {
-        this.file.writeInFile(video.toString());
+        this.fileHandler.writeInFile(video.toString());
     }
 
     @Override
     public List<Video> findAll() {
-        return convertList(this.file.readLinesFromFile());
+        return convertList(this.fileHandler.readLinesFromFile());
+    }
+
+    @Override
+    public void editVideo(int index, Video newVideo) {
+        this.fileHandler.updateLine(index, newVideo.toString());
     }
 
     private List<Video> convertList(List<String> lines) {

@@ -1,6 +1,8 @@
 package util;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +33,15 @@ public class FileHandler {
             System.err.println("Erro ao ler os dados: " + e.getMessage());
         }
         return linesFromFile;
+    }
+
+    public void updateLine(int lineNumber, String newLine){
+        List<String> linesFile = readLinesFromFile();
+        linesFile.set(lineNumber,newLine);
+        try {
+            Files.write(file.toPath(), linesFile);
+        } catch (IOException e) {
+            System.err.println("Erro ao atualizar arquivo: " + e.getMessage());
+        }
     }
 }

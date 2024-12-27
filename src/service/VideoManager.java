@@ -4,6 +4,7 @@ import model.Category;
 import model.Video;
 import util.MenuUtil;
 import util.ScannerUtil;
+import util.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,14 +40,6 @@ public class VideoManager {
         return createVideo(split[0], split[1], split[2], split[3], split[4]);
     }
 
-    public static void showVideoAttributes(Video video){
-        System.out.println("1. Título: " + video.getTitle());
-        System.out.println("2. Descrição: " + video.getDescription());
-        System.out.println("3. Duração (minutos): " + video.getDuration());
-        System.out.println("4. Categoria: " + video.getCategory());
-        System.out.println("5. Data de publicação: " + video.getPublicationDate());
-    }
-
     public static String readVideoTitle(Scanner scanner) {
         String title;
         while (true) {
@@ -77,7 +70,7 @@ public class VideoManager {
         return description;
     }
 
-    private static int readVideoDuration(Scanner scanner) {
+    public static int readVideoDuration(Scanner scanner) {
         int duration;
         while (true) {
             try {
@@ -92,7 +85,7 @@ public class VideoManager {
         return duration;
     }
 
-    private static String readVideoCategory(Scanner scanner) {
+    public static String readVideoCategory(Scanner scanner) {
         MenuUtil.showMenu(Category.class, "Escolha uma categoria: ");
         while (true) {
             int option = ScannerUtil.readInt(scanner, "Categoria: ");
@@ -103,7 +96,7 @@ public class VideoManager {
         }
     }
 
-    private static Date readVideoDate(Scanner scanner) {
+    public static Date readVideoDate(Scanner scanner) {
         Date date;
         while (true) {
             try {
@@ -116,5 +109,13 @@ public class VideoManager {
             }
         }
         return date;
+    }
+
+    public static void showVideoAttributes(Video video){
+        System.out.println("1. Título: " + video.getTitle());
+        System.out.println("2. Descrição: " + video.getDescription());
+        System.out.println("3. Duração (minutos): " + video.getDuration());
+        System.out.println("4. Categoria: " + video.getCategory());
+        System.out.println("5. Data de publicação: " + DateUtil.toString(video.getPublicationDate()));
     }
 }
