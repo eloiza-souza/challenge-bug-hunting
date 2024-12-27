@@ -41,7 +41,17 @@ public class FileHandler {
         try {
             Files.write(file.toPath(), linesFile);
         } catch (IOException e) {
-            System.err.println("Erro ao atualizar arquivo: " + e.getMessage());
+            System.err.println("Erro ao editar vídeo: " + e.getMessage());
+        }
+    }
+
+    public void deleteLine(int lineNumber){
+        List<String> linesFile = readLinesFromFile();
+        linesFile.remove(lineNumber);
+        try {
+            Files.write(file.toPath(), linesFile);
+        } catch (IOException e) {
+            System.err.println("Erro ao deletar vídeo: " + e.getMessage());
         }
     }
 }

@@ -8,4 +8,5 @@ public interface VideoService {
     void addVideo(Video video);
     List<Video> listVideos();
     void setVideo(int index, Video video);
+    void deleteVideo(int index);
 }

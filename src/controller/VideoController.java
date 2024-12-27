@@ -98,23 +98,32 @@ public class VideoController {
 
     private void editVideo(Scanner scanner) {
         List<Video> videoList = videoService.listVideos();
-        if (videoList.isEmpty())
-            System.out.println("Não há vídeos para serem editados");
-        showVideos(videoList);
-        int index = getValidVideoIndex(scanner, videoList.size());
-        System.out.println("Editando o vídeo...");
-        videoService.setVideo(index, editVideoByAttributes(scanner, videoList.get(index)));
-        System.out.println("Vídeo editado com sucesso!");
+        if (videoList.isEmpty()) {
+            System.out.println("Não há vídeos cadastrados");
+        } else {
+            showVideos(videoList);
+            int index = getValidVideoIndex(scanner, videoList.size());
+            videoService.setVideo(index, editVideoByAttributes(scanner, videoList.get(index)));
+            System.out.println("Vídeo editado com sucesso!");
+        }
     }
 
-
     private void deleteVideo(Scanner scanner) {
+        List<Video> videoList = videoService.listVideos();
+        if (videoList.isEmpty()) {
+            System.out.println("Não há vídeos cadastrados");
+        } else {
+            showVideos(videoList);
+            int index = getValidVideoIndex(scanner, videoList.size());
+            videoService.deleteVideo(index);
+            System.out.println("Vídeo deletado com sucesso!");
+        }
     }
 
     private int getValidVideoIndex(Scanner scanner, int size) {
         int index;
         while (true) {
-            index = ScannerUtil.readInt(scanner, "Digite o número do vídeo a ser alterado: ") - 1;
+            index = ScannerUtil.readInt(scanner, "Digite o número do vídeo: ") - 1;
             if (index >= 0 && index < size) {
                 break;
             }
@@ -127,7 +136,7 @@ public class VideoController {
         VideoManager.showVideoAttributes(video);
         int option;
         do {
-            option = ScannerUtil.readInt(scanner, "Digite o número do atributo a ser alterado (ou 0 para sair): ");
+            option = ScannerUtil.readInt(scanner, "Digite o número do atributo a ser alterado (ou 0 para finalizar edição): ");
             switch (option) {
                 case 0:
                     System.out.println("Edição concluída.");
@@ -150,7 +159,7 @@ public class VideoController {
                 default:
                     System.out.println("Opção inválida. Por favor, insira um número entre 0 e 5.");
             }
-        }while (option != 0);
+        } while (option != 0);
         System.out.println("Video alterado:");
         VideoManager.showVideoAttributes(video);
         return video;

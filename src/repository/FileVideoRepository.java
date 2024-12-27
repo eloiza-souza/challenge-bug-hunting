@@ -30,6 +30,11 @@ public class FileVideoRepository implements VideoRepository {
         this.fileHandler.updateLine(index, newVideo.toString());
     }
 
+    @Override
+    public void deleteVideo(int index) {
+        this.fileHandler.deleteLine(index);
+    }
+
     private List<Video> convertList(List<String> lines) {
         List<Video> videos = new ArrayList<>();
         for (String line : lines) {
