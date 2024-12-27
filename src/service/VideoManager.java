@@ -14,11 +14,11 @@ public class VideoManager {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static Video createVideo(Scanner scanner) {
-        return new Video(getVideoTitle(scanner),
-                getVideoDescription(scanner),
-                getVideoDuration(scanner),
-                getVideoCategory(scanner),
-                getVideoDate(scanner));
+        return new Video(readVideoTitle(scanner),
+                readVideoDescription(scanner),
+                readVideoDuration(scanner),
+                readVideoCategory(scanner),
+                readVideoDate(scanner));
     }
 
     public static Video createVideo(String title, String description, String duration, String category,
@@ -39,7 +39,7 @@ public class VideoManager {
         return createVideo(split[0], split[1], split[2], split[3], split[4]);
     }
 
-    private static String getVideoTitle(Scanner scanner) {
+    public static String readVideoTitle(Scanner scanner) {
         String title;
         while (true) {
             title = ScannerUtil.readString(scanner, "Digite o título do vídeo: ");
@@ -54,7 +54,7 @@ public class VideoManager {
         return title;
     }
 
-    private static String getVideoDescription(Scanner scanner) {
+    public static String readVideoDescription(Scanner scanner) {
         String description;
         while (true) {
             description = ScannerUtil.readString(scanner, "Digite a descrição do vídeo: ");
@@ -69,7 +69,7 @@ public class VideoManager {
         return description;
     }
 
-    private static int getVideoDuration(Scanner scanner) {
+    private static int readVideoDuration(Scanner scanner) {
         int duration;
         while (true) {
             try {
@@ -84,7 +84,7 @@ public class VideoManager {
         return duration;
     }
 
-    private static String getVideoCategory(Scanner scanner) {
+    private static String readVideoCategory(Scanner scanner) {
         MenuUtil.showMenu(Category.class, "Escolha uma categoria: ");
         while (true) {
             int option = ScannerUtil.readInt(scanner, "Categoria: ");
@@ -95,7 +95,7 @@ public class VideoManager {
         }
     }
 
-    private static Date getVideoDate(Scanner scanner) {
+    private static Date readVideoDate(Scanner scanner) {
         Date date;
         while (true) {
             try {
