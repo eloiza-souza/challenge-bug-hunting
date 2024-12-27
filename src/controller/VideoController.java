@@ -81,24 +81,18 @@ public class VideoController {
             System.out.println("Sistema não tem vídeos cadastrados.");
         else {
             System.out.println("Vídeos cadastrados:");
-            showVideos(videoList);
+            VideoManager.showVideos(videoList);
         }
     }
 
-    private void showVideos(List<Video> videos) {
-        for (int i = 0; i < videos.size(); i++) {
-            System.out.println((i + 1) + ". " + videos.get(i));
-        }
-    }
-
-    private void searchByTitle(Scanner scanner) {
+      private void searchByTitle(Scanner scanner) {
         String query = ScannerUtil.readString(scanner, "Digite o título para busca: ");
         List<Video> resultList = new TitleSearchStrategy().search(videoService.listVideos(), query);
         if (resultList.isEmpty()) {
             System.out.println("Nenhum vídeo encontrado com o título: '" + query + "'.");
         } else {
             System.out.println("Resultados encontrados para o título: '" + query + "':");
-            showVideos(resultList);
+            VideoManager.showVideos(resultList);
         }
     }
 
@@ -107,7 +101,7 @@ public class VideoController {
         if (videoList.isEmpty()) {
             System.out.println("Não há vídeos cadastrados");
         } else {
-            showVideos(videoList);
+            VideoManager.showVideos(videoList);
             int index = getValidVideoIndex(scanner, videoList.size());
             videoService.setVideo(index, editVideoByAttributes(scanner, videoList.get(index)));
             System.out.println("Vídeo editado com sucesso!");
@@ -119,7 +113,7 @@ public class VideoController {
         if (videoList.isEmpty()) {
             System.out.println("Não há vídeos cadastrados");
         } else {
-            showVideos(videoList);
+            VideoManager.showVideos(videoList);
             int index = getValidVideoIndex(scanner, videoList.size());
             videoService.deleteVideo(index);
             System.out.println("Vídeo deletado com sucesso!");
@@ -133,14 +127,14 @@ public class VideoController {
             System.out.println("Nenhum vídeo encontrado com a categoria: '" + category + "'.");
         } else {
             System.out.println("Resultados encontrados para a categoria: '" + category + "':");
-            showVideos(resultList);
+            VideoManager.showVideos(resultList);
         }
     }
 
     private void showVideosSortByDate() {
         List<Video> videoList = videoService.listVideos();
         videoList.sort((Video v1, Video v2) -> v1.getPublicationDate().compareTo(v2.getPublicationDate()));
-        showVideos(videoList);
+        VideoManager.showVideos(videoList);
     }
 
     private void showStatisticsReport() {

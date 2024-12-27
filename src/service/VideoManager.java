@@ -9,6 +9,7 @@ import util.ScannerUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class VideoManager {
@@ -109,6 +110,12 @@ public class VideoManager {
             }
         }
         return date;
+    }
+
+    public static void showVideos(List<Video> videos) {
+        for (int i = 0; i < videos.size(); i++) {
+            System.out.println((i + 1) + ". " + videos.get(i));
+        }
     }
 
     public static void showVideoAttributes(Video video) {
