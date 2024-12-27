@@ -39,6 +39,14 @@ public class VideoManager {
         return createVideo(split[0], split[1], split[2], split[3], split[4]);
     }
 
+    public static void showVideoAttributes(Video video){
+        System.out.println("1. Título: " + video.getTitle());
+        System.out.println("2. Descrição: " + video.getDescription());
+        System.out.println("3. Duração (minutos): " + video.getDuration());
+        System.out.println("4. Categoria: " + video.getCategory());
+        System.out.println("5. Data de publicação: " + video.getPublicationDate());
+    }
+
     public static String readVideoTitle(Scanner scanner) {
         String title;
         while (true) {
