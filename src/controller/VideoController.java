@@ -9,7 +9,9 @@ import strategy.TitleSearchStrategy;
 import util.MenuUtil;
 import util.ScannerUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class VideoController {
@@ -37,6 +39,7 @@ public class VideoController {
                         case DELETE -> deleteVideo(scanner);
                         case VIDEOS_BY_CATEGORY -> filterByCategory(scanner);
                         case SORT_BY_DATE -> showVideosSortByDate();
+                        case REPORT -> showStatisticsReport();
                         case EXIT -> {
                             System.out.println("Encerrando o programa...");
                             System.exit(0);
@@ -140,6 +143,35 @@ public class VideoController {
         showVideos(videoList);
     }
 
+    private void showStatisticsReport() {
+        List<Video> videoList = videoService.listVideos();
+        showTotalVideos(videoList);
+        showTotalVideosDuration(videoList);
+        showTotalVideosByCategory(videoList);
+    }
+
+    private void showTotalVideos(List<Video> videoList) {
+        System.out.println("Total de vídeos cadastrados: " + videoList.size());
+    }
+
+    private void showTotalVideosDuration(List<Video> videoList) {
+        int totalDuration = videoList.stream()
+                .mapToInt(Video::getDuration)
+                .sum();
+        System.out.println("Duração total dos vídeos (minutos): " + totalDuration);
+    }
+
+    private void showTotalVideosByCategory(List<Video> videoList) {
+        Map<String, Integer> videosByCategory = new HashMap<>();
+
+        for (Video video : videoList) {
+            String category = video.getCategory();
+            videosByCategory.put(category, videosByCategory.getOrDefault(category, 0) + 1);
+        }
+        for (Map.Entry<String, Integer> entry : videosByCategory.entrySet()) {
+            System.out.println("Categoria: " + entry.getKey() + ": " + entry.getValue() + " vídeo(s).");
+        }
+    }
 
     private int getValidVideoIndex(Scanner scanner, int size) {
         int index;
