@@ -6,8 +6,9 @@ import service.VideoServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        VideoController videoController =
-                new VideoController(new VideoServiceImpl(new FileVideoRepository("videos.txt")));
+        FileVideoRepository videoRepository = new FileVideoRepository("videos.txt");
+        VideoServiceImpl videoService = new VideoServiceImpl(videoRepository);
+        VideoController videoController = new VideoController(videoService);
         videoController.run();
     }
 }
