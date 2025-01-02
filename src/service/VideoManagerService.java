@@ -5,6 +5,7 @@ import model.Video;
 import util.DateUtil;
 import util.MenuUtil;
 import util.ScannerUtil;
+import util.VideoValidatorUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,11 +26,11 @@ public class VideoManagerService {
 
     public static Video createVideo(String title, String description, String duration, String category,
                                     String publicationDate) throws IllegalArgumentException, ParseException {
-        VideoValidator.validateTitle(title);
-        VideoValidator.validateDescription(description);
-        VideoValidator.validateCategory(category);
-        int validatedDuration = VideoValidator.validateDuration(duration);
-        Date validatedDate = VideoValidator.validateDate(publicationDate);
+        VideoValidatorUtil.validateTitle(title);
+        VideoValidatorUtil.validateDescription(description);
+        VideoValidatorUtil.validateCategory(category);
+        int validatedDuration = VideoValidatorUtil.validateDuration(duration);
+        Date validatedDate = VideoValidatorUtil.validateDate(publicationDate);
         return new Video(title, description, validatedDuration, category, validatedDate);
     }
 
@@ -46,7 +47,7 @@ public class VideoManagerService {
         while (true) {
             title = ScannerUtil.readString(scanner, "Digite o título do vídeo: ");
             try {
-                VideoValidator.validateTitle(title);
+                VideoValidatorUtil.validateTitle(title);
                 break;
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
@@ -61,7 +62,7 @@ public class VideoManagerService {
         while (true) {
             description = ScannerUtil.readString(scanner, "Digite a descrição do vídeo: ");
             try {
-                VideoValidator.validateDescription(description);
+                VideoValidatorUtil.validateDescription(description);
                 break;
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
@@ -75,7 +76,7 @@ public class VideoManagerService {
         int duration;
         while (true) {
             try {
-                duration = VideoValidator.validateDuration(
+                duration = VideoValidatorUtil.validateDuration(
                         ScannerUtil.readString(scanner, "Digite a duração do vídeo (em minutos): "));
                 break;
             } catch (IllegalArgumentException e) {
@@ -101,7 +102,7 @@ public class VideoManagerService {
         Date date;
         while (true) {
             try {
-                date = VideoValidator.validateDate(
+                date = VideoValidatorUtil.validateDate(
                         ScannerUtil.readString(scanner, "Digite a data de publicação (dd/MM/yyyy): "));
                 break;
             } catch (IllegalArgumentException e) {
