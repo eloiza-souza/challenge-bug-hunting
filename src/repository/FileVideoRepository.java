@@ -11,8 +11,8 @@ import java.util.List;
 public class FileVideoRepository implements VideoRepository {
     private final FileHandler fileHandler;
 
-    public FileVideoRepository(String filePath) {
-        this.fileHandler = new FileHandler(filePath);
+    public FileVideoRepository(FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
     }
 
     @Override
