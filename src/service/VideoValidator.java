@@ -6,7 +6,7 @@ import util.DateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class VideoValidator {
+public abstract class VideoValidator {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void validateTitle(String title) {
