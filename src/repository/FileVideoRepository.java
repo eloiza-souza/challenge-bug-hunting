@@ -1,7 +1,7 @@
 package repository;
 
 import model.Video;
-import service.VideoManager;
+import service.VideoManagerService;
 import util.FileHandler;
 
 import java.text.ParseException;
@@ -39,7 +39,7 @@ public class FileVideoRepository implements VideoRepository {
         List<Video> videos = new ArrayList<>();
         for (String line : lines) {
             try {
-                videos.add(VideoManager.createVideo(line));
+                videos.add(VideoManagerService.createVideo(line));
             } catch (ParseException e) {
                 System.err.println("Data inválida");
                 ;

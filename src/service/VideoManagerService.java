@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class VideoManager {
+public class VideoManagerService {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static Video createVideo(Scanner scanner) {

@@ -2,7 +2,7 @@ package controller;
 
 import model.PrincipalMenu;
 import model.Video;
-import service.VideoManager;
+import service.VideoManagerService;
 import service.VideoService;
 import strategy.ListByCategoryStrategy;
 import strategy.TitleSearchStrategy;
@@ -71,7 +71,7 @@ public class VideoController {
     }
 
     private void addVideo(Scanner scanner) {
-        videoService.addVideo(VideoManager.createVideo(scanner));
+        videoService.addVideo(VideoManagerService.createVideo(scanner));
         System.out.println("Vídeo adicionado com sucesso!");
     }
 
@@ -81,7 +81,7 @@ public class VideoController {
             System.out.println("Sistema não tem vídeos cadastrados.");
         else {
             System.out.println("Vídeos cadastrados:");
-            VideoManager.showVideos(videoList);
+            VideoManagerService.showVideos(videoList);
         }
     }
 
@@ -92,7 +92,7 @@ public class VideoController {
             System.out.println("Nenhum vídeo encontrado com o título: '" + query + "'.");
         } else {
             System.out.println("Resultados encontrados para o título: '" + query + "':");
-            VideoManager.showVideos(resultList);
+            VideoManagerService.showVideos(resultList);
         }
     }
 
@@ -101,7 +101,7 @@ public class VideoController {
         if (videoList.isEmpty()) {
             System.out.println("Não há vídeos cadastrados");
         } else {
-            VideoManager.showVideos(videoList);
+            VideoManagerService.showVideos(videoList);
             int index = getValidVideoIndex(scanner, videoList.size());
             videoService.setVideo(index, editVideoByAttributes(scanner, videoList.get(index)));
             System.out.println("Vídeo editado com sucesso!");
@@ -113,7 +113,7 @@ public class VideoController {
         if (videoList.isEmpty()) {
             System.out.println("Não há vídeos cadastrados");
         } else {
-            VideoManager.showVideos(videoList);
+            VideoManagerService.showVideos(videoList);
             int index = getValidVideoIndex(scanner, videoList.size());
             videoService.deleteVideo(index);
             System.out.println("Vídeo deletado com sucesso!");
@@ -121,20 +121,20 @@ public class VideoController {
     }
 
     private void filterByCategory(Scanner scanner) {
-        String category = VideoManager.readVideoCategory(scanner);
+        String category = VideoManagerService.readVideoCategory(scanner);
         List<Video> resultList = new ListByCategoryStrategy().search(videoService.listVideos(), category);
         if (resultList.isEmpty()) {
             System.out.println("Nenhum vídeo encontrado com a categoria: '" + category + "'.");
         } else {
             System.out.println("Resultados encontrados para a categoria: '" + category + "':");
-            VideoManager.showVideos(resultList);
+            VideoManagerService.showVideos(resultList);
         }
     }
 
     private void showVideosSortByDate() {
         List<Video> videoList = videoService.listVideos();
         videoList.sort((Video v1, Video v2) -> v1.getPublicationDate().compareTo(v2.getPublicationDate()));
-        VideoManager.showVideos(videoList);
+        VideoManagerService.showVideos(videoList);
     }
 
     private void showStatisticsReport() {
@@ -180,17 +180,17 @@ public class VideoController {
     }
 
     private Video editVideoByAttributes(Scanner scanner, Video video) {
-        VideoManager.showVideoAttributes(video);
+        VideoManagerService.showVideoAttributes(video);
         int option;
         do {
             option = ScannerUtil.readInt(scanner, "Digite o número do atributo a ser alterado (ou 0 para finalizar edição): ");
             switch (option) {
                 case 0 -> System.out.println("Fim da edição.");
-                case 1 -> video.setTitle(VideoManager.readVideoTitle(scanner));
-                case 2 -> video.setDescription(VideoManager.readVideoDescription(scanner));
-                case 3 -> video.setDuration(VideoManager.readVideoDuration(scanner));
-                case 4 -> video.setCategory(VideoManager.readVideoCategory(scanner));
-                case 5 -> video.setPublicationDate(VideoManager.readVideoDate(scanner));
+                case 1 -> video.setTitle(VideoManagerService.readVideoTitle(scanner));
+                case 2 -> video.setDescription(VideoManagerService.readVideoDescription(scanner));
+                case 3 -> video.setDuration(VideoManagerService.readVideoDuration(scanner));
+                case 4 -> video.setCategory(VideoManagerService.readVideoCategory(scanner));
+                case 5 -> video.setPublicationDate(VideoManagerService.readVideoDate(scanner));
                 default -> System.out.println("Opção inválida. Por favor, insira um número entre 0 e 5.");
             }
         } while (option != 0);
