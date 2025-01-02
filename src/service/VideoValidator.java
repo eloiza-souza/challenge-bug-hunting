@@ -53,12 +53,17 @@ public abstract class VideoValidator {
     }
 
     public static Date validateDate(String dateString) {
+        if (dateString == null || dateString.trim().isEmpty()) {
+            throw new IllegalArgumentException("A data não pode ser nula ou vazia.");
+        }
+        if (!dateString.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            throw new IllegalArgumentException("O ano deve conter quatro dígitos.");
+        }
         Date date = DateUtil.parseDate(dateString);
-        if (date.before(new Date())) {
-            return date;
-        } else {
+        if (!date.before(new Date())) {
             throw new IllegalArgumentException("A data do vídeo deve ser anterior ao dia de hoje. " +
                     "Valor fornecido: " + DateUtil.toString(date));
         }
+        return date;
     }
 }
