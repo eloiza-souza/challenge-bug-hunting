@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateUtil {
+public abstract class DateUtil {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     public static boolean isValidDate(String dateInput) {
