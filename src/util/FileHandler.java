@@ -14,8 +14,9 @@ public class FileHandler {
 
     private File file;
 
-    public FileHandler(String filePath) {
-        this.file = new File(filePath);
+    public FileHandler(File file) {
+
+        this.file = file;
     }
 
     public void writeInFile(String text) {
