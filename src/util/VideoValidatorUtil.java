@@ -5,7 +5,7 @@ import model.Category;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class VideoValidatorUtil {
+public class VideoValidatorUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void validateTitle(String title) {
