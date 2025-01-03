@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FileHandler {
 
-    private File file;
+    private final File file;
 
     public FileHandler(File file) {
 
