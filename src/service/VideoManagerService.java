@@ -8,13 +8,11 @@ import util.ScannerUtil;
 import util.VideoValidatorUtil;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class VideoManagerService {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static Video createVideo(Scanner scanner) {
         return new Video(readVideoTitle(scanner),
@@ -25,7 +23,7 @@ public class VideoManagerService {
     }
 
     public static Video createVideo(String title, String description, String duration, String category,
-                                    String publicationDate) throws IllegalArgumentException, ParseException {
+                                    String publicationDate) throws IllegalArgumentException {
         VideoValidatorUtil.validateTitle(title);
         VideoValidatorUtil.validateDescription(description);
         VideoValidatorUtil.validateCategory(category);
