@@ -2,11 +2,9 @@ package util;
 
 import model.Category;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VideoValidatorUtil {
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void validateTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
