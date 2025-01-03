@@ -9,6 +9,7 @@ import strategy.TitleSearchStrategy;
 import util.MenuUtil;
 import util.ScannerUtil;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +86,7 @@ public class VideoController {
         }
     }
 
-      private void searchByTitle(Scanner scanner) {
+    private void searchByTitle(Scanner scanner) {
         String query = ScannerUtil.readString(scanner, "Digite o título para busca: ");
         List<Video> resultList = new TitleSearchStrategy().search(videoService.listVideos(), query);
         if (resultList.isEmpty()) {
@@ -133,7 +134,7 @@ public class VideoController {
 
     private void showVideosSortByDate() {
         List<Video> videoList = videoService.listVideos();
-        videoList.sort((Video v1, Video v2) -> v1.getPublicationDate().compareTo(v2.getPublicationDate()));
+        videoList.sort(Comparator.comparing(Video::getPublicationDate));
         VideoManagerService.showVideos(videoList);
     }
 
