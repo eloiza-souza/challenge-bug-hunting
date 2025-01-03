@@ -1,41 +1,49 @@
 package repository;
 
 import model.Video;
+import service.VideoManagerService;
+import util.FileHandler;
 
-import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileVideoRepository implements VideoRepository {
-    private final File file;
+    private final FileHandler fileHandler;
 
-    public FileVideoRepository(String filePath) {
-        this.file = new File(filePath);
+    public FileVideoRepository(FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
     }
 
     @Override
     public void save(Video video) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-            bw.write(video.toString());
-            bw.newLine();
-        } catch (IOException e) {
-            // Ignorar erros por enquanto
-        }
+        this.fileHandler.writeInFile(video.toString());
     }
 
     @Override
     public List<Video> findAll() {
+        return convertList(this.fileHandler.readLinesFromFile());
+    }
+
+    @Override
+    public void editVideo(int index, Video newVideo) {
+        this.fileHandler.updateLine(index, newVideo.toString());
+    }
+
+    @Override
+    public void deleteVideo(int index) {
+        this.fileHandler.deleteLine(index);
+    }
+
+    private List<Video> convertList(List<String> lines) {
         List<Video> videos = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                Video video = Video.fromString(line);
-                if (video != null) {
-                    videos.add(video);
-                }
+        for (String line : lines) {
+            try {
+                videos.add(VideoManagerService.createVideo(line));
+            } catch (ParseException e) {
+                System.err.println("Data inválida");
+                ;
             }
-        } catch (IOException e) {
-            // Ignorar erros por enquanto
         }
         return videos;
     }
